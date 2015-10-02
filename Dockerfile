@@ -39,6 +39,14 @@ RUN \
 	chown jenkins /var/lib/jenkins -Rf
 EXPOSE 8080
 
+# We'll also make jenkins able to sudo. The point here is to allow jobs to 
+# install new programs without having to modify the docker instance all the
+# time. It means a job can break the jenkins instance, but it's easy to fix
+# (just restart one), the important stuff is stored with the jenkins user 
+# access anyway. And we trust others to have good intentions.
+RUN apt-get install sudo -y
+RUN echo "jenkins ALL= NOPASSWD: ALL" >>/etc/sudoers
+
 # We get our build tools
 RUN apt-get install make g++ subversion -y
 
@@ -46,7 +54,11 @@ RUN apt-get install make g++ subversion -y
 RUN apt-get install vim -y
 
 # Postfix basic setup
+# Some servers will refuse our emails if we don't do this.
 RUN postconf -e myhostname=florent.clairambault.fr mydomain=clairambault.fr
+
+# Timezone fix
+RUN echo Europe/Paris > /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata
 
 # We setup a start point
 COPY start.sh /usr/local/bin/start.sh
