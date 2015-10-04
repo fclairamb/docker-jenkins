@@ -1,8 +1,9 @@
-# Jenkins instance
+# Jenkins container
 
-This is a draft of a docker instance with jenkins + postfix.
+This is a draft of a docker container with jenkins + postfix.
 
-This docker instance is a mix of the [official docker](https://github.com/jenkinsci/docker), itself built from [this docker](https://github.com/dockerfile/java/blob/master/oracle-java8/Dockerfile).
+This docker container is inspired from the [official docker container](https://github.com/jenkinsci/docker), 
+itself built from [a java8 container](https://github.com/dockerfile/java/blob/master/oracle-java8/Dockerfile).
 
 You can test it like this:
 
