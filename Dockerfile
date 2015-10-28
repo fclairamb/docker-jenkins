@@ -7,7 +7,7 @@ USER root
 # All the CI scripts will have to install their dependencies themselves.
 RUN \
   apt-get update -y && \
-  apt-get install rsyslog wget postfix make sudo -y && \
+  apt-get install rsyslog wget ca-certificates postfix make sudo -y && \
   useradd -d /var/lib/jenkins -u 1000 -m -s /bin/bash jenkins && \
   echo "jenkins ALL= NOPASSWD: ALL" >>/etc/sudoers
 VOLUME /var/lib/jenkins
