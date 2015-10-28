@@ -9,5 +9,5 @@ if [ "$IMAGE_ID" = "" ]; then
 fi
 sudo docker rm -f jenkins-mj
 
-mkdir -p data/jenkins
+mkdir -p data/jenkins && sudo chown 1000:1000 data/jenkins -R
 sudo docker run --name jenkins-mj --restart=always --tty --interactive --publish 8080:8080 --volume $(pwd)/data/jenkins:/var/lib/jenkins $IMAGE_ID
