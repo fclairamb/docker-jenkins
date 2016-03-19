@@ -7,6 +7,6 @@ itself built from [a java8 container](https://github.com/dockerfile/java/blob/ma
 
 You can test it like this:
 
-    mkdir -p $HOME/jenkins-mj/data/jenkins
-    docker run -ti -v $HOME/jenkins-mj/data/jenkins:/var/lib/jenkins -p 8080:8080 fclairamb/jenkins-mj
+    mkdir -p $HOME/docker-jenkins/data/jenkins
+    docker run -ti -v $HOME/docker-jenkins/data/jenkins:/var/lib/jenkins -p 8080:8080 fclairamb/docker-jenkins
     

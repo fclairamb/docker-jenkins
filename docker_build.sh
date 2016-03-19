@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sudo docker build -t fclairamb/jenkins-mj .
+sudo docker build -t fclairamb/docker-jenkins .

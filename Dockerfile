@@ -9,7 +9,8 @@ RUN \
   apt-get update -y && \
   apt-get install rsyslog wget ca-certificates postfix make sudo -y && \
   useradd -d /var/lib/jenkins -u 1000 -m -s /bin/bash jenkins && \
-  echo "jenkins ALL= NOPASSWD: ALL" >>/etc/sudoers
+  echo "jenkins ALL= NOPASSWD: ALL" >>/etc/sudoers && \
+  rm -rf /var/cache/apt/archives/*
 VOLUME /var/lib/jenkins
 
 # Installing java
