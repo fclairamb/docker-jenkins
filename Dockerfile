@@ -7,10 +7,12 @@ USER root
 # All the CI scripts will have to install their dependencies themselves.
 RUN \
   apt-get update -y && \
-  apt-get install rsyslog wget ca-certificates postfix make sudo -y && \
-  useradd -d /var/lib/jenkins -u 1000 -m -s /bin/bash jenkins && \
-  echo "jenkins ALL= NOPASSWD: ALL" >>/etc/sudoers && \
+  apt-get install rsyslog wget ca-certificates make sudo -y && \
   rm -rf /var/cache/apt/archives/*
+
+RUN \
+  useradd -d /var/lib/jenkins -u 1000 -m -s /bin/bash jenkins && \
+  echo "jenkins ALL= NOPASSWD: ALL" >>/etc/sudoers
 VOLUME /var/lib/jenkins
 
 # Installing java
@@ -33,11 +35,11 @@ RUN \
 EXPOSE 8080
 
 # Some dirty setup around emails
-RUN \
-  DEBIAN_FRONTEND=noninteractive apt-get install postfix -y && \
-  postconf -e myhostname=florent.clairambault.fr mydomain=clairambault.fr && \
-  echo Europe/Paris > /etc/timezone && \
-  dpkg-reconfigure --frontend noninteractive tzdata
+#RUN \
+#  DEBIAN_FRONTEND=noninteractive apt-get install postfix -y && \
+#  postconf -e myhostname=florent.clairambault.fr mydomain=clairambault.fr && \
+#  echo Europe/Paris > /etc/timezone && \
+#  dpkg-reconfigure --frontend noninteractive tzdata
 
 # We setup a start point
 COPY start.sh /usr/local/bin/start.sh
